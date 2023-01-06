@@ -4,7 +4,6 @@ import React, { useEffect } from 'react'
 import Body from './components/Body'
 import Sidebar from './components/Sidebar';
 import { useDataLayerValue } from './DataLayers/DataLayer';
-import axios from 'axios'
 
 function Home() {
   const [{user}, dispatch] = useDataLayerValue()

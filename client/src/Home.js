@@ -17,7 +17,7 @@ function Home() {
         },
         credentials: "include"
       })
-
+      console.log('res', res)
       if(res){
         const data = await res.json()
         console.log('data', data)

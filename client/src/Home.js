@@ -4,32 +4,41 @@ import React, { useEffect } from 'react'
 import Body from './components/Body'
 import Sidebar from './components/Sidebar';
 import { useDataLayerValue } from './DataLayers/DataLayer';
+import axios from 'axios'
+
 function Home() {
   const [{user}, dispatch] = useDataLayerValue()
   useEffect(() => {
     async function fetchUser() {
-      console.log('i got called homee')
-      console.log('updating code')
-      const res = await fetch('/getCurrentUser', {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        credentials: "include"
-      })
+      try {
 
-      console.log('res',await res.json())
-      if(res){
-        const data = await res.json()
-        console.log('data', data)
-        dispatch({
-          type: 'SET_USER',
-          user: data.user
+        console.log('i got called homee')
+        console.log('updating code')
+        const res = await fetch('/getCurrentUser', {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          credentials: "include"
         })
-      } else {
-        console.log('no user')
+
+        if(res){
+          const data = await res.json()
+          console.log('data', data)
+          dispatch({
+            type: 'SET_USER',
+            user: data.user
+          })
+        } else {
+          console.log('no user')
+        }
+
+      } catch (err) {
+        console.log(err)
       }
+      
+      
     }
     
     fetchUser()

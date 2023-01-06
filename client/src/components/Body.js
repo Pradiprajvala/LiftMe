@@ -11,7 +11,7 @@ function Body() {
   useEffect( () => {
     console.log('i get called')
     async function getCars(){
-      // console.log('hello mm')
+      console.log('hello mm')
       setIsLoading(true)
       try {
       const carsRes = await fetch('/getCars', {

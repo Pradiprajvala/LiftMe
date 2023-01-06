@@ -21,8 +21,9 @@ function Body() {
         Accept: "application/json"
       },
       })
+      console.log('carsRes',carsRes)
       const data = await carsRes.json()
-      // console.log('res',data)
+      console.log('cars',data)
       dispatch({type:'UPDATE_CAR', newCars:[...data.cars] })
       } catch(err) {
       console.log(err)

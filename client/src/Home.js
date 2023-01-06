@@ -25,6 +25,8 @@ function Home() {
           type: 'SET_USER',
           user: data.user
         })
+      } else {
+        console.log('no user')
       }
     }
     

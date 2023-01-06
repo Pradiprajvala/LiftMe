@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import Body from './components/Body'
 import Sidebar from './components/Sidebar';
 import { useDataLayerValue } from './DataLayers/DataLayer';
+import axios from 'axios'
 
 function Home() {
   const [{user}, dispatch] = useDataLayerValue()
@@ -13,21 +14,32 @@ function Home() {
 
         console.log('i got called homee')
         console.log('updating code')
-        const res = await fetch('/getCurrentUser', {
+
+        const res = await axios.get('/getCurrentUser', {
           method: "GET",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json"
           },
-          credentials: "include"
+          withCredentials: true
         })
-        console.log(res)
+
+
+        
+        // const res = await fetch('/getCurrentUser', {
+        //   method: "GET",
+        //   headers: {
+        //     Accept: "application/json",
+        //     "Content-Type": "application/json"
+        //   },
+        //   credentials: "include"
+        // })
+        console.log(res.data)
         if(res){
-          const data = await res.json()
-          console.log('data', data)
+          console.log('this user',res.data.user)
           dispatch({
             type: 'SET_USER',
-            user: data.user
+            user: res.data.user
           })
         } else {
           console.log('no user')

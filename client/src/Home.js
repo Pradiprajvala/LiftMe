@@ -9,6 +9,7 @@ function Home() {
   useEffect(() => {
     async function fetchUser() {
       console.log('i got called homee')
+      console.log('updating code')
       const res = await fetch('/getCurrentUser', {
         method: "GET",
         headers: {

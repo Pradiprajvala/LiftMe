@@ -46,6 +46,15 @@ app.use(require('./router/postLikeDislike'))
 app.use(require('./router/updateProfile'))
 
 app.use(express.static(path.join(__dirname,"./client/build")))
+
+app.get("*", function (_, res) {
+    res.sendFile(path.join(__dirname, "./client/build", "index.html")),
+    function (err) {
+        if (err) {
+            res.status(500).send(err);
+        }
+    }
+})
 // app.get('/', (req,res) => {
 //     res.send('hello')
 // })

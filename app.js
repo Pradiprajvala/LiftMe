@@ -40,10 +40,10 @@ app.use(require('./router/updateProfile'))
 //     res.send('hello')
 // })
 
-if(process.env.NODE_ENV == "production"){
+
     console.log('production')
     app.use(express.static("client/build"))
-}
+
 
 app.listen(PORT, () => {
     console.log(`server running on port ${PORT}` );

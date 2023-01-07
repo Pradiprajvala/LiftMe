@@ -9,7 +9,7 @@ app.use(cookieParser())
 require('./db/connection')
 
 // const User = require('./model/userSchema')
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5001
 app.use(express.json())
 
 app.use(require('./router/auth'))
@@ -36,13 +36,10 @@ app.use(require('./router/postLikeDislike'))
 
 app.use(require('./router/updateProfile'))
 
+app.use(express.static(path.join(__dirname,"./client/build")))
 // app.get('/', (req,res) => {
 //     res.send('hello')
 // })
-
-
-    console.log('production')
-    app.use(express.static("client/build"))
 
 
 app.listen(PORT, () => {

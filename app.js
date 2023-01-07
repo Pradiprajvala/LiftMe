@@ -3,6 +3,7 @@ const dotenv = require('dotenv')
 const express = require('express')
 const cors = require('cors')
 const logger = require('morgan')
+const path = require('path')
 
 dotenv.config({path: './config.env'})
 

@@ -3,13 +3,11 @@ import Header from './Header'
 import '../styles/MyProfile.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import av1 from '../assets/CarImages/car2.jpg'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CarBanner from './CarBanner'
 import SingleRequest from './SingleRequest'
-import Requests from './Requests'
 import ProfileAvatar from '../assets/Icons/add-user.png'
 import Loading from './Loading'
+import { baseUrl } from '../App'
 const MyProfile = () => {
     const [user,setUser] = useState({})
     const [myCars, setMyCars] = useState({})
@@ -21,7 +19,7 @@ const MyProfile = () => {
     useEffect(() => {
         async function getMyProfile() {
           setIsLoading(true)
-        const res = await fetch('/getMyProfile', {
+        const res = await fetch(baseUrl + '/getMyProfile', {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -31,7 +29,7 @@ const MyProfile = () => {
       })
 
       if(res.status === 401){
-        alert('please login ton see your profile')
+        alert('please login to see your profile')
         nevigate('/login')
       } else if(res.status === 200){
         const data = await res.json()
@@ -44,7 +42,7 @@ const MyProfile = () => {
      async function getMyCars() {
       setIsLoading(true)
         console.log('sending')
-        const res = await fetch('/getMyCars', {
+        const res = await fetch(baseUrl + '/getMyCars', {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -70,7 +68,7 @@ const MyProfile = () => {
       setIsLoading(true)
       
       try {
-          const res = await fetch('/getRequests', {
+          const res = await fetch(baseUrl + '/getRequests', {
               method: "GET",
               headers: {
                   "Content-Type": "application/json",
@@ -112,7 +110,7 @@ const MyProfile = () => {
   const updateProfileImage = async () => {
     try {
       setIsLoading(true)
-      const res = await fetch('/updateProfileImage', {
+      const res = await fetch(baseUrl + '/updateProfileImage', {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -150,7 +148,7 @@ const MyProfile = () => {
           accept='image/*'      
           onChange={imageHandler} />
               {
-                image ? <img className='image' src ={image} />  : user ? user.image ? <img className='image' src ={user.image} /> :  <img src={ProfileAvatar}  className='imageAvatar'  /> :  <img src={ProfileAvatar}  className='imageAvatar'   />
+                image ? <img className='image' alt='' src ={image} />  : user ? user.image ? <img className='image' alt='' src ={user.image} /> :  <img src={ProfileAvatar} alt=''  className='imageAvatar'  /> :  <img src={ProfileAvatar} alt=''  className='imageAvatar'   />
               }
               
           {

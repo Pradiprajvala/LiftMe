@@ -6,14 +6,13 @@ import '../styles/CarBanner.css'
 import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import WifiProtectedSetupIcon from '@mui/icons-material/WifiProtectedSetup';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
- import { useDataLayerValue } from '../DataLayers/DataLayer'
 import { useNavigate } from  'react-router-dom'
+import { baseUrl } from '../App';
 
 function CarBanner({myFavouriteCars, car}) {
  
   const navigate = useNavigate();
-  const [{cars}, dispatch] = useDataLayerValue();
-  const {_id,name,company,catagory,images,transmission,passengerCapacity,tankCapacity,average,fuel,price,availability,owner, liftFrom, dropTo} = car
+  const {_id,name,catagory,images,transmission,passengerCapacity,tankCapacity,price, liftFrom, dropTo} = car
   const isFavourite = myFavouriteCars ? myFavouriteCars.includes(_id) : false;
   console.log('fav cars', myFavouriteCars, 'carId', _id)
   console.log('isFavourite', isFavourite)
@@ -29,7 +28,7 @@ function CarBanner({myFavouriteCars, car}) {
     e.stopPropagation();
     setIsFavouriteState(true)
     try {
-      const res = await fetch('/postLikeDislike',{
+      const res = await fetch(baseUrl+ '/postLikeDislike',{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +63,7 @@ function CarBanner({myFavouriteCars, car}) {
     e.stopPropagation();
     setIsFavouriteState(false)
     try {
-      const res = await fetch('/postLikeDislike',{
+      const res = await fetch(baseUrl + '/postLikeDislike',{
         method: "POST",
         headers: {
           "Content-Type": "application/json",

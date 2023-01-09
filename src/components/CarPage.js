@@ -4,17 +4,18 @@ import "../styles/CarPage.css"
 import { useLocation, useNavigate } from 'react-router-dom'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { baseUrl } from '../App';
 const CarPage = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const car = location.state.car
   const isFavourite = location.state.isFavourite
-  const {_id,name,company,catagory,images,transmission,passengerCapacity,tankCapacity,average,fuel,price,availability,ownerId, liftFrom, dropTo} = car
+  const {_id,name,company,catagory,images,transmission,passengerCapacity,fuel,price,ownerId, liftFrom, dropTo} = car
 
   const sendCarRequest = async () => {
     try {
 
-      const res = await fetch('/sendLiftRequest', {
+      const res = await fetch(baseUrl + '/sendLiftRequest', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +48,7 @@ const CarPage = () => {
         <div className="carPage__carContainer">
           <div className='carContainer'>
             <div className='imageContainer'>
-              <img src={images[0]} /> 
+              <img src={images[0]} alt='' /> 
             </div>
             <div className='carInfo'> 
               <div className='carInfoHeader'>

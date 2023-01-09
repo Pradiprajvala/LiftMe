@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import SingleRequest from './SingleRequest'
 import Loading from './Loading'
+import { baseUrl } from '../App'
 const Requests = () => {
     const navigate = useNavigate()
     const location = useLocation()
@@ -15,12 +16,11 @@ const Requests = () => {
     const [requests, setRequests] = useState([])
     const [requestsByMe, setRequestsByMe] = useState([])
     useEffect(() => {
-        let arr = []
         async function getRequests() {
             setIsLoading(true)
             console.log(location.state.user)
             try {
-                const res = await fetch('/getRequests', {
+                const res = await fetch(baseUrl + '/getRequests', {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -45,7 +45,7 @@ const Requests = () => {
             setIsLoading(true)
             console.log(location.state.user)
             try {
-                const res = await fetch('/getRequestsByMe', {
+                const res = await fetch(baseUrl + '/getRequestsByMe', {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

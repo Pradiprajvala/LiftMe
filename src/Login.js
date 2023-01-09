@@ -1,10 +1,11 @@
 import React, {useRef} from 'react'
 import Header from './components/Header'
 import './styles/Login.css'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDataLayerValue } from './DataLayers/DataLayer'
+import { baseUrl } from './App'
 const Login = () => {
-  const [{cars}, dispatch] = useDataLayerValue();
+  const [_,dispatch] = useDataLayerValue();
     const navigate = useNavigate()
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
@@ -18,7 +19,7 @@ const Login = () => {
       password: passwordRef.current.value
     }
     try {
-        const res = await fetch('/login', {
+        const res = await fetch(baseUrl + '/login', {
         method: 'POST',
         headers: {
             "Content-Type" : "application/json",

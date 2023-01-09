@@ -20,22 +20,18 @@
 
 
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import './index.css';
 import Home from './Home';
-import reportWebVitals from './reportWebVitals';
 import PostCar from './components/PostCar'
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
-import SharedLayout from './components/SharedLayout';
-import { DataLayer } from './DataLayers/DataLayer';
-import reducer, { defaultState } from './DataLayers/reducer';
 import Signup from './Signup';
 import Login from './Login'
 import CarPage from './components/CarPage';
 import Requests from './components/Requests';
 import MyProfile from './components/MyProfile';
 import UserProfile from './components/UserProfile';
-import Loading from './components/Loading';
+// export const baseUrl = 'https://liftme.up.railway.app/api';
+export const baseUrl = 'api';
 const App = () => {
   return (
   <React.StrictMode>

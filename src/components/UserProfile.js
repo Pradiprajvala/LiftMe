@@ -1,21 +1,19 @@
-import { CastRounded } from '@mui/icons-material'
 import React, { useEffect, useState } from 'react'
 import Header from './Header'
-import av1 from '../assets/CarImages/car2.jpg'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CarBanner from './CarBanner'
-import SingleRequest from './SingleRequest'
 import { useLocation } from 'react-router-dom'
+import { baseUrl } from '../App';
 const UserProfile = () => {
     const location = useLocation()
     const id = location.state.userId
-// const id = "630e3e708acf65858d56fce1"
+
 const [user,setUser] = useState({})
 const [cars,setCars] = useState([])
 useEffect(() => {
     async function getUserProfile() {
         try{
-            const res = await fetch(`/getUserProfile?id=${id}`, {
+            const res = await fetch(`${baseUrl}/getUserProfile?id=${id}`, {
                 method: "GET",
                 headers: {
                   Accept: "application/json",
@@ -44,7 +42,7 @@ useEffect(() => {
         <div className='myProfileContainer' >
             <div className="myProfileHeader">
             {
-                  user ? user.image ? <img className='image' src ={user.image} /> :  <AccountCircleIcon className='image'  sx={{ fontSize: 225, color: '#1A202C' }} /> :  <AccountCircleIcon className='image'  sx={{ fontSize: 108, color: '#1A202C' }} />
+                  user ? user.image ? <img alt='' className='image' src ={user.image} /> :  <AccountCircleIcon className='image'  sx={{ fontSize: 225, color: '#1A202C' }} /> :  <AccountCircleIcon className='image'  sx={{ fontSize: 108, color: '#1A202C' }} />
                 
             }
 

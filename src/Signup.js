@@ -3,6 +3,7 @@ import Header from './components/Header'
 import './styles/Signup.css'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom'
+import { baseUrl } from './App';
 const Signup = () => {
   const navigate = useNavigate()
   const nameRef = useRef(null)
@@ -51,7 +52,7 @@ const Signup = () => {
     
     
     try {
-      const res = await fetch('/register', {
+      const res = await fetch(baseUrl + '/register', {
       method: "POST",
       headers: {
         "Content-Type" : "application/json"
@@ -86,7 +87,7 @@ const Signup = () => {
             
             <form onSubmit={handleSubmit} method='POST'>
             {
-              image ? <img src={image} /> : <AccountCircleIcon htmlFor="inputProfileImage" className='avatarr' sx={{ fontSize: 108, color: '#1A202C' }} />
+              image ? <img src={image} alt='' /> : <AccountCircleIcon htmlFor="inputProfileImage" className='avatarr' sx={{ fontSize: 108, color: '#1A202C' }} />
             }
               <input className='imageInput'
           type="file"

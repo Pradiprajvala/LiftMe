@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import '../styles/SingleRequest.css'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import av1 from '../assets/avatars/profil.png'
 import { useNavigate } from 'react-router-dom';
+import { baseUrl } from '../App';
 const SingleRequest = ({requestCar,requestSender, requestId, isApproved, byMe}) => {
     const nevigate = useNavigate()
     const {name,_id,image} = requestSender;
-    const {images,liftFrom,dropTo,company,price} = requestCar
+    const {liftFrom,dropTo,price} = requestCar
     const carId = requestCar._id
     const carName = requestCar.name
      console.log('ya', requestCar)
@@ -23,7 +23,7 @@ const SingleRequest = ({requestCar,requestSender, requestId, isApproved, byMe}) 
     const acceptRequest = async () => {
         try {
             console.log('id',requestId)
-            const res = await fetch('/acceptRequest', {
+            const res = await fetch(baseUrl + '/acceptRequest', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const SingleRequest = ({requestCar,requestSender, requestId, isApproved, byMe}) 
     return (
     <div className='singleRequest'>
        {
-        image ? <img className='avatar' src={image} sx={{ fontSize: 44}}></img> : <AccountCircleIcon className='avatar' sx={{ fontSize: 44, color: '#1A202C' }} />
+        image ? <img alt='' className='avatar' src={image} sx={{ fontSize: 44}}></img> : <AccountCircleIcon className='avatar' sx={{ fontSize: 44, color: '#1A202C' }} />
        }
        <div className='singleRequestMiddle' >
             <div className='sr__middleHeader'><h4>{name}</h4> for <h5>{carName}</h5></div>

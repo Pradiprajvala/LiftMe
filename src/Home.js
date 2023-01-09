@@ -5,17 +5,18 @@ import Body from './components/Body'
 import Sidebar from './components/Sidebar';
 import { useDataLayerValue } from './DataLayers/DataLayer';
 import axios from 'axios'
+import { baseUrl } from './App';
 
 function Home() {
-  const [{user}, dispatch] = useDataLayerValue()
+  const [dispatch] = useDataLayerValue()
   useEffect(() => {
     async function fetchUser() {
       try {
 
         console.log('i got called homee')
-        console.log('updating code')
+        console.log('log1');
 
-        const res = await axios.get('/getCurrentUser', {
+        const res = await axios.get(baseUrl+'/getCurrentUser', {
           method: "GET",
           headers: {
             Accept: "application/json",
@@ -23,10 +24,10 @@ function Home() {
           },
           withCredentials: true
         })
-
+        console.log('log2')
 
         
-        // const res = await fetch('/getCurrentUser', {
+        // const res = await fetch(baseUrl + '/getCurrentUser', {
         //   method: "GET",
         //   headers: {
         //     Accept: "application/json",
@@ -34,19 +35,20 @@ function Home() {
         //   },
         //   credentials: "include"
         // })
-        console.log(res.data)
+        console.log('hey its me')
         if(res){
-          console.log('this user',res.data.user)
+          const user = await res.data
+          console.log('this user',user)
           dispatch({
             type: 'SET_USER',
-            user: res.data.user
+            user: user
           })
         } else {
           console.log('no user')
         }
 
       } catch (err) {
-        console.log(err)
+        console.log('me error',err)
       }
       
       

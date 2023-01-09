@@ -3,16 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import PostCar from './components/PostCar'
-import {BrowserRouter,Routes,Route} from 'react-router-dom'
-import SharedLayout from './components/SharedLayout';
 import { DataLayer } from './DataLayers/DataLayer';
 import reducer, { defaultState } from './DataLayers/reducer';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <DataLayer defaultState={defaultState} reducer={reducer}><App /></DataLayer>
-    
   </React.StrictMode>
 );
 

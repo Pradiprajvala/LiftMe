@@ -7,13 +7,12 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SearchIcon from '@mui/icons-material/Search';
 import TuneIcon from '@mui/icons-material/Tune';
-import av1 from '../assets/avatars/profil.png'
 import { useDataLayerValue } from '../DataLayers/DataLayer';
 import { useNavigate } from 'react-router-dom';
 
 function Header () {
     const nevigate = useNavigate()
-    const [{user}, dispatch] = useDataLayerValue()
+    const [{user}] = useDataLayerValue()
     const loginClickHandler = () => {
         nevigate('/login')
     }
@@ -52,7 +51,7 @@ function Header () {
                 <NotificationsIcon onClick={seeMyRequests} sx={{ fontSize: 24 }} className='header__feature'/>
                 <SettingsIcon sx={{ fontSize: 24 }} className='header__feature'/>
                 {
-                    !user ? <button onClick={loginClickHandler}>Login</button> : user.image ? <img className='header__avatar' onClick={seeMyProfile} src={user.image} sx={{ fontSize: 44}}></img> : <AccountCircleIcon onClick={seeMyProfile} className='header__avatar' sx={{ fontSize: 44, color: '#1A202C' }} />
+                    !user ? <button onClick={loginClickHandler}>Login</button> : user.image ? <img alt='' className='header__avatar' onClick={seeMyProfile} src={user.image} sx={{ fontSize: 44}}></img> : <AccountCircleIcon onClick={seeMyProfile} className='header__avatar' sx={{ fontSize: 44, color: '#1A202C' }} />
                 }
                 
             </div>  

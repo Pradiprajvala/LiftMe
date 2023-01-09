@@ -5,6 +5,7 @@
   "engines": {
     "node": "16.17.0"
   },
+  "proxy": "http://localhost:5001",
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
@@ -13,6 +14,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.2.2",
     "concurrently": "^7.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -50,5 +52,13 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pradiprajvala/LiftMe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Pradiprajvala/LiftMe/issues"
+  },
+  "homepage": "https://github.com/Pradiprajvala/LiftMe#readme"
 }

@@ -1,7 +1,8 @@
 import '../styles/Sidebar.css'
-import {Router,Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';import React from 'react'
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import React from 'react'
 import { Slider } from '@mui/material';
 const Sidebar = () => {
   return (

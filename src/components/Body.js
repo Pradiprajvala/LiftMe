@@ -4,6 +4,7 @@ import CarBanner from './CarBanner'
 // import cars from '../data'
 import { useDataLayerValue } from '../DataLayers/DataLayer'
 import Loading from './Loading';
+import { baseUrl } from '../App';
 function Body() {
   const [{cars,user}, dispatch] = useDataLayerValue();
   const [isLoading, setIsLoading] = useState(false)
@@ -14,7 +15,7 @@ function Body() {
       console.log('hello mm')
       setIsLoading(true)
       try {
-      const carsRes = await fetch('/getCars', {
+      const carsRes = await fetch(baseUrl + '/getCars', {
       "method": "GET",
       headers: {
         "Content-Type": "application/json",

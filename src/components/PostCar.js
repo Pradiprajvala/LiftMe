@@ -2,13 +2,11 @@ import React, {useState, useRef} from 'react'
 import '../styles/PostCar.css'
 import SelectCar from '../assets/CarImages/selectCarImage.jpg'
 import Header from './Header'
-import { useEffect } from 'react';
-import {useDataLayerValue} from '../DataLayers/DataLayer'
 import { useNavigate } from 'react-router-dom';
+import { baseUrl } from '../App';
 function PostCar() {
 
   const navigate = useNavigate();
-  const [state, dispatch] = useDataLayerValue();
   const [image, setImage] = useState(null);
   
   const nameRef = useRef(null)
@@ -78,7 +76,7 @@ function PostCar() {
     // });
 
     try {
-       const res = await fetch('/postCar', {
+       const res = await fetch(baseUrl + '/postCar', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -92,7 +90,7 @@ function PostCar() {
     if(res.status === 401 || !res){
       alert('Plaese Login First')
       navigate('/login')
-    } else if(res.status != 201){
+    } else if(res.status !== 201){
       alert('Could not post car')
     } else {
       alert('Car Posted Successfully')
@@ -116,7 +114,7 @@ function PostCar() {
          
          <div className='containerGrid'>
          <div className='imageSelector'>
-         <img src={ image ? image : SelectCar} />
+         <img alt='' src={ image ? image : SelectCar} />
          <input className='imageInput'
           type="file"
           name="carImage"

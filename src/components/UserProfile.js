@@ -5,8 +5,8 @@ import CarBanner from './CarBanner'
 import { useLocation } from 'react-router-dom'
 import { baseUrl } from '../App';
 const UserProfile = () => {
-    const location = useLocation()
-    const id = location.state.userId
+const location = useLocation()
+const id = location.state.userId
 
 const [user,setUser] = useState({})
 const [cars,setCars] = useState([])
@@ -21,10 +21,9 @@ useEffect(() => {
                 }
               })
         
-            if(res.status === 201){
+            if(res.status === 201 || res.status === 200){
                 
                 const data = await res.json()
-                console.log(data)
                 setUser(data.user)
                 setCars(data.cars)
               }

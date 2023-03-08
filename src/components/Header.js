@@ -19,6 +19,7 @@ function Header () {
 
     const seeMyRequests = () => {
         if(user){
+            console.log(user)
             nevigate('/requests', {state: {user}})
         } else {
             nevigate('/login')
@@ -51,7 +52,7 @@ function Header () {
                 <NotificationsIcon onClick={seeMyRequests} sx={{ fontSize: 24 }} className='header__feature'/>
                 <SettingsIcon sx={{ fontSize: 24 }} className='header__feature'/>
                 {
-                    !user ? <button onClick={loginClickHandler}>Login</button> : user.image ? <img alt='' className='header__avatar' onClick={seeMyProfile} src={user.image} sx={{ fontSize: 44}}></img> : <AccountCircleIcon onClick={seeMyProfile} className='header__avatar' sx={{ fontSize: 44, color: '#1A202C' }} />
+                    !user ? <button onClick={loginClickHandler}>Login</button> : user.user && user.user.image ? <img alt='' className='header__avatar' onClick={seeMyProfile} src={user.user.image} sx={{ fontSize: 44}}></img> : <AccountCircleIcon onClick={seeMyProfile} className='header__avatar' sx={{ fontSize: 44, color: '#1A202C' }} />
                 }
                 
             </div>  

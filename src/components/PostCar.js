@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { baseUrl } from '../App';
 function PostCar() {
 
+  const token = document.cookie.split('=')[1]
   const navigate = useNavigate();
   const [image, setImage] = useState(null);
   
@@ -82,9 +83,11 @@ function PostCar() {
         "Content-Type": "application/json",
         Accept: "application/json"
       },
-      credentials: "include",
+      // credentials: "include",
       body: JSON.stringify({
-        ...state
+        ...state,
+        jwtoken: token
+      
       })
     })
     if(res.status === 401 || !res){

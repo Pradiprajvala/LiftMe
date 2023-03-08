@@ -30,8 +30,8 @@ import CarPage from './components/CarPage';
 import Requests from './components/Requests';
 import MyProfile from './components/MyProfile';
 import UserProfile from './components/UserProfile';
-// export const baseUrl = 'https://liftme.up.railway.app/api';
-export const baseUrl = 'api';
+// export const baseUrl = 'http://localhost:5001/api';
+export const baseUrl = 'https://api-liftme.up.railway.app/api';
 const App = () => {
   return (
   <React.StrictMode>

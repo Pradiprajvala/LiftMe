@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { useDataLayerValue } from './DataLayers/DataLayer'
 import { baseUrl } from './App'
 const Login = () => {
-  const [_,dispatch] = useDataLayerValue();
-    const navigate = useNavigate()
+  const [,dispatch] = useDataLayerValue();
+  const navigate = useNavigate()
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
   
@@ -33,7 +33,8 @@ const Login = () => {
         window.alert('invalid credentials')
     } else {
         const user = await res.json()
-        console.log(user.user)
+        const token = user.token
+        document.cookie = `jwtoken=${token}`
         dispatch({
           type: 'SET_USER',
           user: user.user

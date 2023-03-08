@@ -9,7 +9,6 @@ const SingleRequest = ({requestCar,requestSender, requestId, isApproved, byMe}) 
     const {liftFrom,dropTo,price} = requestCar
     const carId = requestCar._id
     const carName = requestCar.name
-     console.log('ya', requestCar)
     const [ approved, setApproved ] = useState(isApproved)
 
     const openProfile = () => {
@@ -22,7 +21,6 @@ const SingleRequest = ({requestCar,requestSender, requestId, isApproved, byMe}) 
 
     const acceptRequest = async () => {
         try {
-            console.log('id',requestId)
             const res = await fetch(baseUrl + '/acceptRequest', {
                 method: "POST",
                 headers: {
@@ -57,7 +55,7 @@ const SingleRequest = ({requestCar,requestSender, requestId, isApproved, byMe}) 
     return (
     <div className='singleRequest'>
        {
-        image ? <img alt='' className='avatar' src={image} sx={{ fontSize: 44}}></img> : <AccountCircleIcon className='avatar' sx={{ fontSize: 44, color: '#1A202C' }} />
+        image ? <img alt='' className='avatar' src={image} ></img> : <AccountCircleIcon className='avatar' sx={{ fontSize: 44, color: '#1A202C' }} />
        }
        <div className='singleRequestMiddle' >
             <div className='sr__middleHeader'><h4>{name}</h4> for <h5>{carName}</h5></div>

@@ -8,6 +8,9 @@ import SingleRequest from './SingleRequest'
 import ProfileAvatar from '../assets/Icons/add-user.png'
 import Loading from './Loading'
 import { baseUrl } from '../App'
+
+const token = document.cookie.split('=')[1]
+
 const MyProfile = () => {
     const [user,setUser] = useState({})
     const [myCars, setMyCars] = useState({})
@@ -15,50 +18,61 @@ const MyProfile = () => {
     const [requests,setRequests] = useState([])
     const [image, setImage] = useState(null);
     const nevigate = useNavigate()
-    console.log(user)
     useEffect(() => {
         async function getMyProfile() {
           setIsLoading(true)
-        const res = await fetch(baseUrl + '/getMyProfile', {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        credentials: "include"
-      })
-
-      if(res.status === 401){
-        alert('please login to see your profile')
-        nevigate('/login')
-      } else if(res.status === 200){
-        const data = await res.json()
-        console.log(data)
-        setUser(data)
-      }
-      setIsLoading(false)
+          try {
+            const res = await fetch(baseUrl + '/getMyProfile', {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+              },
+              credentials: "include",
+              body: JSON.stringify({
+                jwtoken: token
+              })
+            })
+      
+            if(res.status === 401){
+              alert('please login to see your profile')
+              nevigate('/login')
+            } else {
+              const data = await res.json()
+              setUser(data)
+            }
+            setIsLoading(false)
+          } catch(err) {
+            console.log('error fetching profile',err)
+          }
     }
 
      async function getMyCars() {
       setIsLoading(true)
-        console.log('sending')
+      try {
         const res = await fetch(baseUrl + '/getMyCars', {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        credentials: "include"
-      })
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            jwtoken: token
+          })
+        })
 
-      if(res.status === 401){
-        alert('please login ton see your profile')
-        nevigate('/login')
-      } else if(res.status === 200){
-        const data = await res.json()
-        console.log(data)
-        setMyCars(data)
-      } 
+        if(res.status === 401){
+          alert('please login ton see your profile')
+          nevigate('/login')
+        } else if(res.status === 200){
+          const data = await res.json()
+          setMyCars(data)
+        } 
+      } catch(err) {
+        console.log(err)
+      }
+        
       setIsLoading(false)      
     }
 
@@ -69,19 +83,21 @@ const MyProfile = () => {
       
       try {
           const res = await fetch(baseUrl + '/getRequests', {
-              method: "GET",
+              method: "POST",
               headers: {
                   "Content-Type": "application/json",
                   Accept: "application/json"
               },
-              credentials: "include"
+              credentials: "include",
+              body: JSON.stringify({
+                jwtoken: token
+              })
           })
           if (res.status === 401) {
               nevigate('/login')
           } else if (res.status === 200) {
               const data = await res.json()
               setRequests(data)
-              // console.log(data)
           }
       } catch (err) {
           console.log(err)
@@ -182,7 +198,6 @@ const MyProfile = () => {
           {
                   user ? user.requestsToMe ?    user.requestsToMe.map(myRequest => {
                           // console.log('car',requests.car)
-                          console.log(myRequest)
                           const requestCar = requests ? requests.car ? requests.car.filter(singleCar => myRequest.carId === singleCar._id) : null : null;
                           const requestSender = requests ? requests.sender ? requests.sender.filter(singleSender => myRequest.userId === singleSender._id) : null : null;
                           // console.log('car',requestCar,'sender',requestSender)

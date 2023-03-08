@@ -9,21 +9,16 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import { useNavigate } from  'react-router-dom'
 import { baseUrl } from '../App';
 
+const token = document.cookie.split('=')[1]
 function CarBanner({myFavouriteCars, car}) {
- 
   const navigate = useNavigate();
   const {_id,name,catagory,images,transmission,passengerCapacity,tankCapacity,price, liftFrom, dropTo} = car
   const isFavourite = myFavouriteCars ? myFavouriteCars.includes(_id) : false;
-  console.log('fav cars', myFavouriteCars, 'carId', _id)
-  console.log('isFavourite', isFavourite)
   const [isFavouriteState, setIsFavouriteState] = useState(isFavourite)
   const clickhandler = () => {
     navigate('/carPage', {state: {car}})
-}
+  }
   
-
-
-
   const makeFavourite =  async (e) => {
     e.stopPropagation();
     setIsFavouriteState(true)
@@ -36,7 +31,8 @@ function CarBanner({myFavouriteCars, car}) {
         },
         body: JSON.stringify({
           isFavourite: true,
-          carId: _id
+          carId: _id,
+          jwtoken: token
         }),
         credentials: "include"
       })
@@ -46,7 +42,6 @@ function CarBanner({myFavouriteCars, car}) {
         setIsFavouriteState(false)
         navigate('login')
       } else if(res.status === 201){
-        // console.log(await res.json())
         setIsFavouriteState(true)
         alert('liked')
       } else {
@@ -54,7 +49,6 @@ function CarBanner({myFavouriteCars, car}) {
       }
     } catch(err) {
       setIsFavouriteState(false)
-      console.log(err)
     }
   }
 
@@ -71,7 +65,8 @@ function CarBanner({myFavouriteCars, car}) {
         },
         body: JSON.stringify({
           isFavourite: false,
-          carId: _id
+          carId: _id,
+          jwtoken: token
         }),
         credentials: "include"
       })
@@ -81,7 +76,6 @@ function CarBanner({myFavouriteCars, car}) {
         alert('please login first')
         navigate('login')
       } else if(res.status === 201){
-        // console.log(await res.json())
         setIsFavouriteState(false)
         alert('removed like')
       } else {
@@ -92,7 +86,6 @@ function CarBanner({myFavouriteCars, car}) {
       console.log(err)
     }
   }
-  console.log('state',isFavouriteState)
   return (
     <div className="carBanner" onClick={clickhandler}>
         <div className="cb__header">
@@ -122,7 +115,6 @@ function CarBanner({myFavouriteCars, car}) {
         <div className='cb__footerBottom'>
           <div className='cb__footerPrice'>
             <h4>${price}/-</h4>
-            {/* <p>day</p> */}
           </div>
           <button>Rent Now</button>
           </div>

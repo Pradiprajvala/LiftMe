@@ -4,41 +4,28 @@ import React, { useEffect } from 'react'
 import Body from './components/Body'
 import Sidebar from './components/Sidebar';
 import { useDataLayerValue } from './DataLayers/DataLayer';
-import axios from 'axios'
 import { baseUrl } from './App';
 
+const token = document.cookie.split('=')[1]
+console.log(token)
+
 function Home() {
-  const [dispatch] = useDataLayerValue()
+  const [,dispatch] = useDataLayerValue()
   useEffect(() => {
     async function fetchUser() {
       try {
-
-        console.log('i got called homee')
-        console.log('log1');
-
-        const res = await axios.get(baseUrl+'/getCurrentUser', {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-          },
-          withCredentials: true
+        const res = await fetch(baseUrl + '/getCurrentUser', {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              jwtoken: token
+            })
         })
-        console.log('log2')
-
-        
-        // const res = await fetch(baseUrl + '/getCurrentUser', {
-        //   method: "GET",
-        //   headers: {
-        //     Accept: "application/json",
-        //     "Content-Type": "application/json"
-        //   },
-        //   credentials: "include"
-        // })
-        console.log('hey its me')
         if(res){
-          const user = await res.data
-          console.log('this user',user)
+          const user = await res.json()
           dispatch({
             type: 'SET_USER',
             user: user
@@ -48,10 +35,8 @@ function Home() {
         }
 
       } catch (err) {
-        console.log('me error',err)
+        console.log('error fetching user',err)
       }
-      
-      
     }
     
     fetchUser()
